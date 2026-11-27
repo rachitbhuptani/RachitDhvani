@@ -18,7 +18,7 @@
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--blush);color:var(--ink);font:500 20px/1.6 "Cormorant Garamond",Georgia,serif;overflow-x:clip}
-body.locked{overflow:hidden;height:100svh}
+body.locked{overflow:hidden;height:100vh}
 img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
@@ -94,8 +94,8 @@ a{color:inherit}
 @media(max-width:440px){.nav .mk{display:none}.nav .lk{margin:0 auto}}
 
 /* ============ PAGE 1–2: ARCH → GARDEN ============ */
-.hero{height:340vh;position:relative;background:#2a1a22}
-.hpin{position:sticky;top:0;height:100svh;overflow:hidden}
+.hero{height:290vh;position:relative;background:#2a1a22}
+.hpin{position:sticky;top:0;height:100vh;overflow:hidden}
 .bg{position:absolute;inset:0;background-size:cover;background-position:center;will-change:transform,opacity,filter}
 .bg.garden{background-image:url(img/garden.jpg);background-position:62% 60%}
 .bg.archbg{background-image:url(img/arch-wide.jpg);background-position:50% 55%;transform-origin:50% 52%}
@@ -132,6 +132,11 @@ a{color:inherit}
 .cdsky p{margin:8px 0 0;font:italic 600 clamp(18px,2vw,22px) "Cormorant Garamond";text-shadow:0 2px 12px #2a1219}
 .cdsky p:empty{display:none}
 .welcome .scr{margin-top:2px}
+.more{position:absolute;left:50%;bottom:clamp(18px,5vh,44px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#fff;pointer-events:auto}
+.more span{font:600 clamp(11px,1.3vw,13px) Cinzel;letter-spacing:.26em;text-transform:uppercase;text-shadow:0 2px 10px #2a1219;margin-bottom:8px;padding:9px 18px;border-radius:99px;background:#2a121955;border:1px solid #ffffff66;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.more i{width:16px;height:16px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);animation:chev 1.6s infinite;opacity:0;filter:drop-shadow(0 1px 4px #2a1219)}
+.more i+i{animation-delay:.25s;margin-top:-6px}
+@keyframes chev{0%{opacity:0;transform:translateY(-6px) rotate(45deg)}50%{opacity:1}100%{opacity:0;transform:translateY(8px) rotate(45deg)}}
 .hfx{position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden}
 .petal{position:absolute;top:-6vh;border-radius:80% 0 80% 0;animation:fall linear infinite;will-change:transform}
 @keyframes fall{0%{transform:translate(0,0) rotate(0)}100%{transform:translate(var(--dx),112vh) rotate(var(--rot))}}
@@ -140,7 +145,7 @@ a{color:inherit}
 .fade{position:absolute;inset:0;background:var(--blush);opacity:0;z-index:7;pointer-events:none}
 
 /* ============ STORY WALL ============ */
-.wall{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.wall{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
 .wall .ph{position:absolute;inset:-8% 0;background:url(img/col1.jpg) center/cover;z-index:-2;will-change:transform}
 .wall::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fff4ea22,#fff4eacc 14%,#fff4eacc 50%,#fff4ea00 66%)}
 .wtext{width:min(580px,90vw);margin-left:clamp(20px,14vw,260px);padding:clamp(80px,12vh,130px) 0}
@@ -153,12 +158,12 @@ a{color:inherit}
 
 /* ============ KM APART ============ */
 .dist{height:280vh;position:relative}
-.dpin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:84px 16px 24px;overflow:hidden;isolation:isolate}
+.dpin{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:84px 16px 24px;overflow:hidden;isolation:isolate}
 .dpin .bgd{position:absolute;inset:0;background:url(img/col3.jpg) center/cover;z-index:-2;transform:scale(1.06)}
 .dpin::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#fff6efe6,#fbe7dfd0 70%)}
 .dpin .lab{color:var(--rose2)}
 .dpin h2{margin:4px 0 0;font:600 clamp(30px,5vh,56px)/1.05 "Cormorant Garamond";color:var(--wine)}
-.dscene{position:relative;width:min(1000px,96vw,84svh);aspect-ratio:2.1;margin-top:clamp(40px,8vh,80px)}
+.dscene{position:relative;width:min(1000px,96vw,84vh);aspect-ratio:2.1;margin-top:clamp(40px,8vh,80px)}
 .city{position:absolute;bottom:0;width:24%;margin:0;text-align:center}
 .city.a{left:2%}.city.b{right:2%}
 .city .win{aspect-ratio:3/4;border-radius:999px 999px 6px 6px;overflow:hidden;border:1px solid var(--gold);outline:1px solid #ecd2c8;outline-offset:6px;box-shadow:0 24px 40px -24px #55242f88}
@@ -174,12 +179,14 @@ a{color:inherit}
 .km span{font:italic 600 clamp(22px,3vw,32px) "Cormorant Garamond";color:var(--rose2)}
 .dq{margin:4px 0 0;font:italic 600 clamp(19px,2.8vh,28px)/1.25 "Cormorant Garamond";color:var(--wine);opacity:var(--q,0);transform:translateY(calc((1 - var(--q,0))*20px))}
 .dq .scr{display:block;font-size:clamp(38px,6vh,64px);font-style:normal;color:var(--rose2)}
-@media(max-width:640px){.dscene{aspect-ratio:1.2;width:min(96vw,60svh)}.city{width:38%}.arc{left:20%;width:60%;top:8%;height:30%}.meet{top:10%}}
+@media(max-width:640px){.dscene{aspect-ratio:1.2;width:min(96vw,60vh)}.city{width:38%}.arc{left:20%;width:60%;top:8%;height:30%}.meet{top:10%}}
 
 /* ============ PHOTO MOMENT ============ */
 .moment{height:240vh;position:relative;background:#f6dfd6}
-.mpin{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
-.mpin .bgc{position:absolute;inset:0;background:url(img/col2.jpg) center/cover;filter:blur(14px);opacity:.45;transform:scale(1.1)}
+.mpin{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+.mpin .bgc{position:absolute;inset:0;background:url(img/couple.jpg) center/cover;filter:blur(18px) saturate(1.1);opacity:.7;transform:scale(1.15)}
+.mpin::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,#f6dfd6aa);pointer-events:none}
+.mpin .awin{z-index:1}
 .awin{position:relative;width:var(--w,36vw);height:var(--h,66vh);border-radius:var(--r,999px) var(--r,999px) 0 0;overflow:hidden;background:url(img/col1.jpg) 30% center/cover;box-shadow:0 40px 80px -40px #55242f99}
 .awin .ph{position:absolute;inset:0;display:grid;place-content:center;transform:scale(var(--s,1.2))}
 .awin .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 40%}
@@ -193,7 +200,7 @@ a{color:inherit}
 .gal h2{margin:6px 0 0;font:600 clamp(42px,6vw,76px)/1 "Cormorant Garamond";color:var(--wine)}
 .gal h2 .scr{color:var(--rose2)}
 .gal p.hint{margin:8px 0 0;font:italic 600 18px "Cormorant Garamond";color:var(--ink2)}
-.pstack{position:relative;width:min(380px,78vw,46svh);aspect-ratio:3/4;margin:clamp(34px,5vh,56px) auto 0;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.pstack{position:relative;width:min(380px,78vw,46vh);aspect-ratio:3/4;margin:clamp(34px,5vh,56px) auto 0;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .pol{position:absolute;inset:0;background:#fffaf3;padding:4% 4% 15%;box-shadow:0 26px 50px -24px #55242f88,0 0 0 1px #ecd8c8;border-radius:4px;cursor:grab;transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s;will-change:transform}
 .pol img{width:100%;height:100%;object-fit:cover;pointer-events:none;display:block}
 .pol span{position:absolute;left:0;right:0;bottom:3.5%;font:400 clamp(24px,3.4vw,32px)/1 "Great Vibes",cursive;color:var(--rose2)}
@@ -203,12 +210,12 @@ a{color:inherit}
 .gctl b{font:600 13px Cinzel;letter-spacing:.2em;color:var(--wine);min-width:60px}
 /* ============ PROGRAMME: invitation-card carousel ============ */
 .cards{position:relative}
-.cpin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 0 20px;background:radial-gradient(ellipse at 50% 40%,#fffaf3,#f6e7dc 70%,#efd9cc)}
+.cpin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 0 20px;background:radial-gradient(ellipse at 50% 40%,#fffaf3,#f6e7dc 70%,#efd9cc)}
 .cpin::before{content:"";position:absolute;inset:0;background:url(img/col3.jpg) center/cover;opacity:.18;filter:blur(3px)}
 .chead{position:relative;text-align:center;margin-bottom:clamp(10px,2vh,22px)}
 .chead .lab{color:var(--rose2)}
 .chead h2{margin:4px 0 0;font:600 clamp(32px,4.6vw,56px)/1 "Cormorant Garamond";color:var(--wine)}
-.deck{position:relative;width:100%;flex:1;max-height:min(700px,66svh);perspective:1600px}
+.deck{position:relative;width:100%;flex:1;max-height:min(700px,66vh);perspective:1600px}
 .card{position:absolute;left:50%;top:0;height:100%;aspect-ratio:2/3;max-width:86vw;transform-style:preserve-3d;will-change:transform;cursor:pointer;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -26px #55242faa,0 0 0 1px #ffffff66;color:var(--ci,#55242f);background:var(--cbg)}
 .card .tx{position:absolute;left:0;right:0;top:15%;text-align:center;padding:0 8%;z-index:3}
 .card h3{margin:0;font:400 clamp(34px,4.4vh,50px)/1.1 "Great Vibes",cursive;color:var(--ct)}
@@ -270,7 +277,7 @@ a{color:inherit}
 .stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .venue{position:relative;padding:clamp(80px,10vw,130px) max(5vw,16px);background:linear-gradient(#f9ece6,#f4dcd3);overflow:hidden}
 .vgrid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,6vw,90px);align-items:center}
-.varch{position:relative;aspect-ratio:3/4;width:min(100%,56svh);margin:0 auto;border-radius:999px 999px 10px 10px;overflow:hidden;border:1px solid var(--gold);outline:1px solid #ecd2c8;outline-offset:10px;box-shadow:0 50px 80px -40px #55242f99}
+.varch{position:relative;aspect-ratio:3/4;width:min(100%,56vh);margin:0 auto;border-radius:999px 999px 10px 10px;overflow:hidden;border:1px solid var(--gold);outline:1px solid #ecd2c8;outline-offset:10px;box-shadow:0 50px 80px -40px #55242f99}
 .varch .bgv{position:absolute;inset:-8% 0;background:url(img/garden.jpg) 62% 60%/cover}
 .vtx .lab{color:var(--rose2)}
 .vtx h2{margin:12px 0 0;font:600 clamp(42px,5.4vw,72px)/1.02 "Cormorant Garamond";color:var(--wine)}
@@ -342,6 +349,7 @@ footer .scr{font-size:52px;color:var(--rose2);margin:0}
    <span class="scr">Welcome</span>
    <span class="wsub">we're so glad you're here</span>
    <div class="cdsky"><span class="lab" id="cdL"></span><div id="cdBox"></div><p id="cdP"></p></div>
+   <a class="more" href="#story"><span>Our story begins below</span><i></i><i></i></a>
   </div>
  </div>
 </section>
@@ -352,7 +360,7 @@ footer .scr{font-size:52px;color:var(--rose2);margin:0}
  <div class="wtext">
   <span class="lab rv">Two cities, one story</span>
   <h2 class="rv">Our <span class="scr">Story</span></h2>
-  <p class="rv">From Ahmedabad to Pune — two families, two cities, and one little story that grew into forever. Your story in a few lines goes here.</p>
+  <p class="rv">Ours is a story our parents began. Rachit from Ahmedabad, Dhvani from Pune — and two families who had a feeling. A few phone calls, one carefully planned first meeting and a cup of chai later, two strangers found themselves talking like old friends. What began as an arranged introduction slowly became the easiest yes of our lives.</p>
   <span class="q rv">“Distance means so little when someone means so much.”</span>
  </div>
 </section>
@@ -384,7 +392,7 @@ footer .scr{font-size:52px;color:var(--rose2);margin:0}
 <section class="gal" id="gallery">
  <span class="lab rv">Moments</span>
  <h2 class="rv">Little <span class="scr">memories</span></h2>
- <p class="hint rv">Swipe or tap to flip through</p>
+ <p class="hint rv">Swipe left or right, or tap</p>
  <div class="pstack" id="pstack"></div>
  <div class="gctl"><button id="gPrev" aria-label="Previous photo">‹</button><b id="gCount"></b><button id="gNext" aria-label="Next photo">›</button></div>
 </section>
@@ -479,10 +487,15 @@ const now=()=>Date.now();
  const next=(dir=1)=>{const top=order[0];top.style.transform=`translate(${dir*130}%,-6%) rotate(${dir*22}deg)`;top.style.opacity=0;setTimeout(()=>{order.push(order.shift());cur=(cur+1)%P.length;lay()},380)};
  const prev=()=>{order.unshift(order.pop());cur=(cur-1+P.length)%P.length;const t=order[0];t.style.transition='none';t.style.transform='translate(-130%,-6%) rotate(-22deg)';t.style.opacity=0;lay();t.style.transform='translate(-130%,-6%) rotate(-22deg)';void t.offsetWidth;t.style.transition='';requestAnimationFrame(lay)};
  let x0=null,dx=0,el=null;
- st.addEventListener('pointerdown',e=>{el=order[0];if(!el.contains(e.target))return;x0=e.clientX;dx=0;el.classList.add('drag');st.setPointerCapture(e.pointerId)});
+ st.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;el=order[0];if(!el.contains(e.target))return;x0=e.clientX;dx=0;el.classList.add('drag');st.setPointerCapture(e.pointerId)});
  st.addEventListener('pointermove',e=>{if(x0===null)return;dx=e.clientX-x0;el.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`});
  const end=()=>{if(x0===null)return;el.classList.remove('drag');x0=null;if(Math.abs(dx)>70)next(dx>0?1:-1);else if(Math.abs(dx)<6)next(1);else lay()};
  st.addEventListener('pointerup',end);st.addEventListener('pointercancel',end);
+ let tx=null,ty=null,tdx=0,horiz=null;
+ st.addEventListener('touchstart',e=>{const t=e.touches[0];tx=t.clientX;ty=t.clientY;tdx=0;horiz=null;el=order[0];el.classList.add('drag')},{passive:true});
+ st.addEventListener('touchmove',e=>{if(tx===null)return;const t=e.touches[0],dX=t.clientX-tx,dY=t.clientY-ty;if(horiz===null&&(Math.abs(dX)>6||Math.abs(dY)>6))horiz=Math.abs(dX)>Math.abs(dY);if(horiz){e.preventDefault();tdx=dX;el.style.transform=`translateX(${dX}px) rotate(${dX/18}deg)`}},{passive:false});
+ const tend=()=>{if(tx===null)return;el.classList.remove('drag');tx=null;if(horiz&&Math.abs(tdx)>50)next(tdx>0?1:-1);else if(horiz===null)next(1);else lay()};
+ st.addEventListener('touchend',tend);st.addEventListener('touchcancel',()=>{if(el){el.classList.remove('drag')}tx=null;lay()});
  $('gNext').onclick=()=>next(1);$('gPrev').onclick=prev;
  st.tabIndex=0;st.setAttribute('aria-label','Photo stack');st.addEventListener('keydown',e=>{if(e.key==='ArrowRight')next(1);if(e.key==='ArrowLeft')prev()});
  lay()})();
@@ -588,7 +601,7 @@ function onScroll(){
  kmEl.textContent=Math.round(520*(1-t));dq.style.setProperty('--q',clamp((p-.76)/.16).toFixed(3));
  // photo moment
  p=RM?1:prog(moment);const e=1-Math.pow(1-p,2),mob=innerWidth<640;
- awin.style.setProperty('--w',`${(mob?70:36)+(mob?30:64)*e}vw`);awin.style.setProperty('--h',`${66+34*e}svh`);awin.style.setProperty('--r',`${999*(1-e)}px`);awin.style.setProperty('--s',(1.2-.2*e).toFixed(3));awin.style.setProperty('--o',clamp((p-.55)/.35).toFixed(3));
+ awin.style.setProperty('--w',`${(mob?78:42)+(mob?22:58)*e}vw`);awin.style.setProperty('--h',`${74+26*e}vh`);awin.style.setProperty('--r',`${999*(1-e)}px`);awin.style.setProperty('--s',(1.2-.2*e).toFixed(3));awin.style.setProperty('--o',clamp((p-.55)/.35).toFixed(3));
  // programme
  layCards(prog(ctrack));
 }
