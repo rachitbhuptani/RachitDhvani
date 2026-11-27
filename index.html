@@ -235,6 +235,12 @@ a{color:inherit}
 .card li{font:600 clamp(11px,1.5vh,13.5px)/1.55 Cinzel;letter-spacing:.06em;text-transform:uppercase}
 .card li.now{color:var(--ct);text-shadow:0 0 12px #fff8}
 .card li.now::after{content:" · now";font-size:.85em}
+.card li{margin:clamp(3px,.7vh,6px) 0}
+.card li .tm{display:inline-block;margin-right:8px;padding:2px 10px 1px;border-radius:99px;background:var(--ct);color:#fff;font:700 clamp(12px,1.7vh,15px)/1.5 Cinzel;letter-spacing:.06em;box-shadow:0 2px 8px #0003;white-space:nowrap}
+.card li.past .tm{opacity:.7}
+.card .tx li .tm{text-shadow:none}
+.card.ph li .tm{font-size:3.9cqw;padding:.3cqw 2.6cqw .1cqw}
+#cd1 li .tm{color:#241634}
 .card li.past{opacity:.55;text-decoration:line-through;text-decoration-thickness:1px}
 .card .vn{display:block;margin-top:4px;font:italic 600 clamp(14px,1.9vh,17px) "Cormorant Garamond"}
 .card .live{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:99px;font:600 10px Cinzel;letter-spacing:.18em;background:var(--ct);color:#fff}
@@ -570,7 +576,7 @@ const deck=$('deck'),dots=$('dots'),ctrack=$('ctrack');
 const sup=n=>n===1?'st':n===2?'nd':n===3?'rd':'th';
 deck.innerHTML=CARDS.map((c,i)=>`<article class="card${c.img?' ph':''}" id="cd${i}" style="--cbg:${c.bg};--ci:${c.ci};--ct:${c.ct};--veil:${c.veil||'#fff'}"><div class="art">${c.img?`<img src="${c.img}" alt="">`:`<svg viewBox="0 0 ${SVGW} ${SVGH}" preserveAspectRatio="xMidYMid slice">${DEFS}${c.art()}</svg>`}</div>
 <div class="tx"><h3>${c.t}</h3><span class="dline">${c.d===15?'Monday':'Tuesday'} · ${c.d}<sup>${sup(c.d)}</sup> February 2027</span>
-<ul>${c.items.map((it,k)=>`<li id="li${i}_${k}">${it[0]?it[0]+' · ':''}${it[1]}</li>`).join('')}</ul>${c.vn?`<span class="vn">${c.vn}</span>`:''}<span class="live" id="cl${i}"></span></div><span class="shine"></span></article>`).join('');
+<ul>${c.items.map((it,k)=>`<li id="li${i}_${k}">${it[0]?`<b class="tm">${it[0]}</b>`:''}${it[1]}</li>`).join('')}</ul>${c.vn?`<span class="vn">${c.vn}</span>`:''}<span class="live" id="cl${i}"></span></div><span class="shine"></span></article>`).join('');
 dots.innerHTML=CARDS.map((c,i)=>`<button id="dt${i}" aria-label="${c.t}"></button>`).join('');
 ctrack.style.height=(CARDS.length*85+60)+'vh';
 const goCard=i=>{i=Math.max(0,Math.min(CARDS.length-1,i));const span=ctrack.offsetHeight-innerHeight,top=ctrack.getBoundingClientRect().top+scrollY+span*i/(CARDS.length-1);scrollTo({top,behavior:RM?'auto':'smooth'})};
