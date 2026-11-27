@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rachit & Dhvani · 16.02.2027</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LV9GY56Q2D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LV9GY56Q2D');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cinzel:wght@500;600&family=Great+Vibes&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
@@ -617,7 +619,7 @@ $('cPrev').onclick=()=>goCard(Math.round(cpos)-1);$('cNext').onclick=()=>goCard(
  deck.addEventListener('pointerup',e=>{if(mx0!==null&&Math.abs(e.clientX-mx0)>50){goCard(Math.round(cpos)+(e.clientX<mx0?1:-1))}mx0=null});
  deck.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)&&Math.abs(e.deltaX)>30){e.preventDefault();goCard(Math.round(cpos)+(e.deltaX>0?1:-1))}},{passive:false});
  addEventListener('keydown',e=>{const r=ctrack.getBoundingClientRect();if(r.top<=0&&r.bottom>=innerHeight){if(e.key==='ArrowRight')goCard(Math.round(cpos)+1);if(e.key==='ArrowLeft')goCard(Math.round(cpos)-1)}});}
-function layCards(p){cpos=p*(CARDS.length-1);const mob=innerWidth<700,gap=mob?.78:.62;
+function layCards(p){cpos=p*(CARDS.length-1);{const k=Math.round(cpos);if(Math.abs(cpos-k)<.15&&gaOnce.has('see_programme'))ga1('card_'+k,{card:CARDS[k].t})}const mob=innerWidth<700,gap=mob?.78:.62;
  CARDS.forEach((c,i)=>{const el=$('cd'+i),o=i-cpos,a=Math.abs(o);
   el.style.transform=`translateX(calc(-50% + ${o*gap*100}%)) translateZ(${-a*140}px) rotateY(${-o*14}deg) scale(${1-Math.min(a,2)*.12})`;
   el.style.zIndex=100-Math.round(a*10);el.style.opacity=a>2.4?0:1-Math.max(0,a-1.4)*.6;el.style.filter=a>.5?`saturate(${1-Math.min(a,1)*.3})`:'none';el.style.setProperty('--sh',a<.15?'120%':'-120%')});
@@ -756,10 +758,12 @@ function petals(){const ov=$('pfx'),car=$('gpet');ov.innerHTML='';car.innerHTML=
   petalRAF=requestAnimationFrame(step)}
  st.step=step;petalRAF=requestAnimationFrame(step)}
 addEventListener('scroll',()=>{if(PF&&PF.sleeping&&PF.live&&scrollY<innerHeight*1.3){PF.sleeping=false;PF.last=performance.now();petalRAF=requestAnimationFrame(PF.step)}},{passive:true});
+// ---- analytics: what guests do (Google Analytics events)
+const ga=(n,p)=>{try{window.gtag&&gtag('event',n,p||{})}catch(e){}},gaOnce=new Set(),ga1=(n,p)=>{if(gaOnce.has(n))return;gaOnce.add(n);ga(n,p)};
 const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 function open(){
  if(entered)return;entered=true;
- intro.classList.add('open');buzz(40);
+ intro.classList.add('open');buzz(40);ga1('open_invite');
  if(RM){gate.classList.add('gone');document.body.classList.remove('locked','closedveil');document.body.classList.add('entered');onScroll();return}
  setTimeout(()=>gate.classList.add('ready'),1500);
  setTimeout(()=>{gate.classList.add('open');if(!RM){buzz([80,50,120,60,180]);petals()}},1900);
@@ -772,7 +776,7 @@ addEventListener('wheel',e=>{if(!entered&&e.deltaY>0)open()},{passive:true});
 let ty0=null;addEventListener('touchstart',e=>{ty0=e.touches[0].clientY},{passive:true});
 addEventListener('touchmove',e=>{if(ty0!==null&&!entered&&ty0-e.touches[0].clientY>30)open()},{passive:true});
 addEventListener('keydown',e=>{if(!entered&&['Enter',' ','ArrowDown','PageDown'].includes(e.key))open()});
-function replay(){document.documentElement.style.scrollBehavior='auto';scrollTo(0,0);entered=false;document.body.classList.remove('entered');document.body.classList.add('locked','closedveil');gate.classList.remove('ready','open','walk','gone');$('gpet').innerHTML='';$('pfx').innerHTML='';if(PF)PF.live=false;cancelAnimationFrame(petalRAF);
+function replay(){ga('replay_intro');document.documentElement.style.scrollBehavior='auto';scrollTo(0,0);entered=false;document.body.classList.remove('entered');document.body.classList.add('locked','closedveil');gate.classList.remove('ready','open','walk','gone');$('gpet').innerHTML='';$('pfx').innerHTML='';if(PF)PF.live=false;cancelAnimationFrame(petalRAF);
  intro.classList.remove('open');requestAnimationFrame(()=>{scrollTo(0,0);document.documentElement.style.scrollBehavior='';onScroll()})}
 document.querySelectorAll('.replay').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();replay()}));
 
@@ -783,10 +787,17 @@ function glideTo(y,ms){cancelAnimationFrame(glideRAF);const de=document.document
  const stop=()=>{cancelAnimationFrame(glideRAF);de.style.scrollBehavior=prev;['wheel','touchstart','keydown'].forEach(e=>removeEventListener(e,stop))};
  ['wheel','touchstart','keydown'].forEach(e=>addEventListener(e,stop,{passive:true}));
  (function f(now){const u=Math.min(1,(now-t0)/ms);scrollTo(0,y0+dy*ease(u));if(u<1)glideRAF=requestAnimationFrame(f);else stop()})(t0)}
+$('enter').addEventListener('click',()=>ga('step_inside'));
 $('enter').addEventListener('click',()=>glideTo(hero.offsetTop+(hero.offsetHeight-innerHeight)*.55,2600));
 const toast=$('toast');const VIDEO_SRC='';
-$('playBtn').addEventListener('click',()=>{if(!VIDEO_SRC){toast.textContent='Our film is coming soon ♥';toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),2600);return}const v=$('vid');v.src=VIDEO_SRC;v.hidden=false;v.play().catch(()=>{})});
+$('playBtn').addEventListener('click',()=>{ga('play_film');if(!VIDEO_SRC){toast.textContent='Our film is coming soon ♥';toast.classList.add('on');setTimeout(()=>toast.classList.remove('on'),2600);return}const v=$('vid');v.src=VIDEO_SRC;v.hidden=false;v.play().catch(()=>{})});
 
+
+// sections guests reach, map opens
+{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){ga1('see_'+e.target.id);io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px -45% 0px'});
+ ['story','dist','moment','gallery','programme','film','venue'].forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el)});
+ const ft=document.querySelector('.foot');if(ft)new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){ga1('reach_end');o.disconnect()}}).observe(ft);
+ document.querySelectorAll('a[href*="google.com/maps"]').forEach(a=>a.addEventListener('click',()=>ga('open_maps')))}
 scrollTo(0,0);update();onScroll();setInterval(update,1000);
 }
 </script>
