@@ -221,8 +221,9 @@ a{color:inherit}
 .cpin::before{content:"";position:absolute;inset:0;background:url(img/col3.jpg) center/cover;opacity:.18;filter:blur(3px)}
 .chead{position:relative;text-align:center;margin-bottom:clamp(10px,2vh,22px)}
 .chead .lab{color:var(--rose2)}
+.chead .swh{margin:4px 0 0;font:italic 600 16px "Cormorant Garamond";color:var(--ink2)}
 .chead h2{margin:4px 0 0;font:600 clamp(32px,4.6vw,56px)/1 "Cormorant Garamond";color:var(--wine)}
-.deck{position:relative;width:100%;flex:1;max-height:min(700px,66vh);perspective:1600px}
+.deck{touch-action:pan-y;position:relative;width:100%;flex:1;max-height:min(700px,66vh);perspective:1600px}
 .card{position:absolute;left:50%;top:0;height:100%;aspect-ratio:2/3;max-width:86vw;transform-style:preserve-3d;will-change:transform;cursor:pointer;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -26px #55242faa,0 0 0 1px #ffffff66;color:var(--ci,#55242f);background:var(--cbg)}
 .card .tx{position:absolute;left:0;right:0;top:15%;text-align:center;padding:0 8%;z-index:3}
 .card h3{margin:0;font:400 clamp(34px,4.4vh,50px)/1.1 "Great Vibes",cursive;color:var(--ct)}
@@ -410,7 +411,7 @@ footer .scr{font-size:52px;color:var(--rose2);margin:0}
 <section class="cards" id="programme">
  <div class="ctrack" id="ctrack">
   <div class="cpin">
-   <div class="chead"><span class="lab">A walk through the wedding</span><h2>The Celebrations</h2></div>
+   <div class="chead"><span class="lab">A walk through the wedding</span><h2>The Celebrations</h2><p class="swh">Swipe the cards or keep scrolling</p></div>
    <div class="deck" id="deck"></div>
    <p class="capt" id="capt" aria-live="polite"></p>
    <div class="cnav"><button class="ar" id="cPrev" aria-label="Previous event">‹</button><div class="dots" id="dots"></div><button class="ar" id="cNext" aria-label="Next event">›</button></div>
@@ -577,6 +578,14 @@ let cpos=0;
 deck.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)goCard(+c.id.slice(2))});
 dots.addEventListener('click',e=>{const b=e.target.closest('button');if(b)goCard(+b.id.slice(2))});
 $('cPrev').onclick=()=>goCard(Math.round(cpos)-1);$('cNext').onclick=()=>goCard(Math.round(cpos)+1);
+{let x0=null,y0=null,hz=null,dx=0,moved=false;
+ deck.addEventListener('touchstart',e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY;hz=null;dx=0;moved=false},{passive:true});
+ deck.addEventListener('touchmove',e=>{if(x0===null)return;const t=e.touches[0],X=t.clientX-x0,Y=t.clientY-y0;if(hz===null&&(Math.abs(X)>8||Math.abs(Y)>8))hz=Math.abs(X)>Math.abs(Y);if(hz){e.preventDefault();dx=X;moved=true}},{passive:false});
+ deck.addEventListener('touchend',e=>{if(x0!==null&&hz&&Math.abs(dx)>40){goCard(Math.round(cpos)+(dx<0?1:-1));e.preventDefault()}x0=null},{passive:false});
+ let mx0=null;deck.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch')mx0=e.clientX});
+ deck.addEventListener('pointerup',e=>{if(mx0!==null&&Math.abs(e.clientX-mx0)>50){goCard(Math.round(cpos)+(e.clientX<mx0?1:-1))}mx0=null});
+ deck.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)&&Math.abs(e.deltaX)>30){e.preventDefault();goCard(Math.round(cpos)+(e.deltaX>0?1:-1))}},{passive:false});
+ addEventListener('keydown',e=>{const r=ctrack.getBoundingClientRect();if(r.top<=0&&r.bottom>=innerHeight){if(e.key==='ArrowRight')goCard(Math.round(cpos)+1);if(e.key==='ArrowLeft')goCard(Math.round(cpos)-1)}});}
 function layCards(p){cpos=p*(CARDS.length-1);const mob=innerWidth<700,gap=mob?.78:.62;
  CARDS.forEach((c,i)=>{const el=$('cd'+i),o=i-cpos,a=Math.abs(o);
   el.style.transform=`translateX(calc(-50% + ${o*gap*100}%)) translateZ(${-a*140}px) rotateY(${-o*14}deg) scale(${1-Math.min(a,2)*.12})`;
