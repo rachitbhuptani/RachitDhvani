@@ -187,6 +187,13 @@ a{color:inherit}
 .mpin .bgc{position:absolute;inset:0;background:url(img/couple.jpg) center/cover;filter:blur(18px) saturate(1.1);opacity:.7;transform:scale(1.15)}
 .mpin::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,#f6dfd6aa);pointer-events:none}
 .mpin .awin{z-index:1}
+.mt{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:min(300px,24vw);color:var(--wine);will-change:opacity,transform}
+.mt.l{left:clamp(16px,5vw,90px);text-align:right}.mt.r{right:clamp(16px,5vw,90px);text-align:left}
+.mt .lab{display:block;color:var(--rose2);margin-bottom:10px}
+.mt .big{display:block;font:600 clamp(26px,2.8vw,40px)/1.15 "Cormorant Garamond";text-shadow:0 2px 16px #fff8f1}
+.mt .big em{font:400 1.35em/1 "Great Vibes",cursive;color:var(--rose2);font-style:normal}
+.awin .cap .cq{display:block;margin-top:10px;font:italic 600 clamp(17px,2vw,24px) "Cormorant Garamond"}
+@media(max-width:760px){.mt{width:auto;left:0!important;right:0!important;text-align:center!important;transform:none}.mt.l{top:clamp(62px,9vh,90px)}.mt.r{top:auto;bottom:clamp(14px,3vh,30px)}.mt .lab{margin-bottom:4px}.mt .big{font-size:22px}.mt .big br{display:none}.mt .big em{font-size:1.4em}}
 .awin{position:relative;width:var(--w,36vw);height:var(--h,66vh);border-radius:var(--r,999px) var(--r,999px) 0 0;overflow:hidden;background:url(img/col1.jpg) 30% center/cover;box-shadow:0 40px 80px -40px #55242f99}
 .awin .ph{position:absolute;inset:0;display:grid;place-content:center;transform:scale(var(--s,1.2))}
 .awin .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 40%}
@@ -385,7 +392,9 @@ footer .scr{font-size:52px;color:var(--rose2);margin:0}
 
 <!-- PHOTO MOMENT -->
 <section class="moment" id="moment">
- <div class="mpin"><div class="bgc"></div><div class="awin" id="awin"><div class="ph"><img src="img/couple.jpg" alt="Rachit and Dhvani"></div><div class="cap"><span class="scr">Rachit &amp; Dhvani</span><span class="lab">15 · 16 February 2027</span></div></div></div>
+ <div class="mpin"><div class="bgc"></div>
+  <div class="mt l" id="mtl"><span class="lab">Where it began</span><span class="big">It started with <br><em>a cup of chai</em></span></div>
+  <div class="mt r" id="mtr"><span class="lab">Where it's going</span><span class="big">…and became <br><em>a lifetime</em></span></div><div class="awin" id="awin"><div class="ph"><img src="img/couple.jpg" alt="Rachit and Dhvani"></div><div class="cap"><span class="scr">Rachit &amp; Dhvani</span><span class="lab">15 · 16 February 2027</span><span class="cq">Two families. Two cities. One forever.</span></div></div></div>
 </section>
 
 <!-- GALLERY -->
@@ -601,7 +610,7 @@ function onScroll(){
  kmEl.textContent=Math.round(520*(1-t));dq.style.setProperty('--q',clamp((p-.76)/.16).toFixed(3));
  // photo moment
  p=RM?1:prog(moment);const e=1-Math.pow(1-p,2),mob=innerWidth<640;
- awin.style.setProperty('--w',`${(mob?78:42)+(mob?22:58)*e}vw`);awin.style.setProperty('--h',`${74+26*e}vh`);awin.style.setProperty('--r',`${999*(1-e)}px`);awin.style.setProperty('--s',(1.2-.2*e).toFixed(3));awin.style.setProperty('--o',clamp((p-.55)/.35).toFixed(3));
+ awin.style.setProperty('--w',`${(mob?72:40)+(mob?28:60)*e}vw`);awin.style.setProperty('--h',`${(mob?64:74)+(mob?36:26)*e}vh`);{const o=Math.max(0,1-p*2.6);$('mtl').style.opacity=o;$('mtr').style.opacity=o;if(!mob){$('mtl').style.transform=`translate(${-p*120}px,-50%)`;$('mtr').style.transform=`translate(${p*120}px,-50%)`}}awin.style.setProperty('--r',`${999*(1-e)}px`);awin.style.setProperty('--s',(1.2-.2*e).toFixed(3));awin.style.setProperty('--o',clamp((p-.55)/.35).toFixed(3));
  // programme
  layCards(prog(ctrack));
 }
