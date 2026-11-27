@@ -675,12 +675,14 @@ fitGate();addEventListener('resize',fitGate);
 const gate=$('gate');
 // ---- tap medallion → doors open → walk in
 const intro=$('intro'),hpin=document.querySelector('.hpin');let entered=false;
+const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 function open(){
  if(entered)return;entered=true;
- intro.classList.add('open');
+ intro.classList.add('open');buzz(40);
  if(RM){gate.classList.add('gone');document.body.classList.remove('locked','closedveil');document.body.classList.add('entered');onScroll();return}
  setTimeout(()=>gate.classList.add('ready'),1700);
- setTimeout(()=>gate.classList.add('open'),2300);
+ setTimeout(()=>{gate.classList.add('open');if(!RM)buzz([90,60,140,80,220])},2300);
+ setTimeout(()=>buzz(30),4100);
  setTimeout(()=>gate.classList.add('walk'),4100);
  setTimeout(()=>{gate.classList.add('gone');document.body.classList.remove('locked','closedveil');document.body.classList.add('entered');onScroll()},5500);
  setTimeout(jump,8000);
